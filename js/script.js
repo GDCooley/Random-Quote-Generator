@@ -24,7 +24,8 @@ const quotes = [{
     {
         quote: "If cats looked like frogs we'd realize what nasty, cruel little bastards they are. Style. That's what people remember.",
         source: 'Terry Pratchett',
-        year: '1992'
+        year: '1992',
+        tags: ['fantasy', 'humor']
     },
     {
         quote: 'Never let your sense of morals prevent you from doing what is right.',
@@ -51,24 +52,38 @@ function getRandomQuote() {
  * `printQuote` function
  ***/
 
-
 function printQuote() {
     let randomQuote = getRandomQuote();
-
-    document.querySelector('.quote').innerHTML = `${randomQuote.quote}`;
-    if (randomQuote.citation && randomQuote.year) {
-        document.querySelector('.source').innerHTML = `${randomQuote.source}<span class="citation"></span><span class="year"></span>`;
-        document.querySelector('.citation').innerHTML = `${randomQuote.citation}`;
-        document.querySelector('.year').innerHTML = `${randomQuote.year}`;
-    } else if (randomQuote.citation && !randomQuote.year) {
-        document.querySelector('.source').innerHTML = `${randomQuote.source}<span class="citation"></span>`;
-        document.querySelector('.citation').innerHTML = `${ randomQuote.citation }`;
-    } else if (!randomQuote.citation && randomQuote.year) {
-        document.querySelector('.source').innerHTML = `${randomQuote.source}<span class="year"></span>`;
-        document.querySelector('.year').innerHTML = `${randomQuote.year}`;
-    } else {
-        document.querySelector('.source').innerHTML = `${randomQuote.source}`;
+    let HTMLString = ``;
+    HTMLString += `<p class="quote">${randomQuote.quote}</p>`;
+    HTMLString += `<p class="source">${randomQuote.source}`;
+    if (randomQuote.citation) {
+        HTMLString += `<span class="citation">${randomQuote.citation}</span>`;
     }
+    if (randomQuote.year) {
+        HTMLString += `<span class="year">${randomQuote.year}</span>`;
+    }
+    HTMLString += `</p>`;
+    if (randomQuote.tags) {
+        HTMLString += `<p class="tags">Tags: ${randomQuote.tags}</p>`
+    }
+
+    document.querySelector('.quote-box').innerHTML = HTMLString;
+
+    // document.querySelector('.quote').innerHTML = `${randomQuote.quote}`;
+    // if (randomQuote.citation && randomQuote.year) {
+    //     document.querySelector('.source').innerHTML = `${randomQuote.source}<span class="citation"></span><span class="year"></span>`;
+    //     document.querySelector('.citation').innerHTML = `${randomQuote.citation}`;
+    //     document.querySelector('.year').innerHTML = `${randomQuote.year}`;
+    // } else if (randomQuote.citation && !randomQuote.year) {
+    //     document.querySelector('.source').innerHTML = `${randomQuote.source}<span class="citation"></span>`;
+    //     document.querySelector('.citation').innerHTML = `${ randomQuote.citation }`;
+    // } else if (!randomQuote.citation && randomQuote.year) {
+    //     document.querySelector('.source').innerHTML = `${randomQuote.source}<span class="year"></span>`;
+    //     document.querySelector('.year').innerHTML = `${randomQuote.year}`;
+    // } else {
+    //     document.querySelector('.source').innerHTML = `${randomQuote.source}`;
+    // }
 }
 
 /***
