@@ -105,8 +105,7 @@ function printQuote() {
 //  The below is a refresh interval to the code that selects a new random quote if the button is not pushed by a 
 //  user in the alotted time.
 
-// let refreshInterval = setInterval(printQuote(), 6000);
-setInterval(printQuote(), 6000);
+setInterval(printQuote, 6000);
 
 /***
  * click event listener for the print quote button
