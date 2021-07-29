@@ -44,35 +44,46 @@ const quotes = [{
  * `getRandomQuote` function
  ***/
 
+// This function creates a random number from 0 to a max based on the length of the quotes Array.
+// The random number generated is then used to return the quote at the same index location within the quotes Array.
+
 function getRandomQuote() {
-    let num = Math.floor(Math.random() * quotes.length); //obtains a random number between 1 and the # of array values
-    console.log(num); // For my own testing purposes to ensure a random number is generated
-    return quotes[num]; // Provides a value (one full object in this case) to the requesting portion of the program
+    const num = Math.floor(Math.random() * quotes.length);
+    console.log(num);
+    return quotes[num];
 }
 
 /***
  * `printQuote` function
  ***/
 
+// This function prints a random quote to the web page.  It begins by calling the GetRandomQuote function which returns
+// the quote.  The function then concatenates the full HTML string that will be printed.  It always prints the quote and 
+// author.  It then determins if the quote also includes a citation, year, and or associated tags and if so adds
+// them to the HTML string.  Commented out at the bottom of the function was the first way I did this, ehich worked, but
+// did not match the requirements of the project.
+
 function printQuote() {
-    let randomQuote = getRandomQuote(); // Calls, and assigns the returned value of, the getRandomQuote object to the variable
-    let HTMLString = ``; // Initiating an empty string that will be populated by the below code
-    HTMLString += `<p class="quote">${randomQuote.quote}</p>`; // Adds the quote to HTMLString
-    HTMLString += `<p class="source">${randomQuote.source}`; // Adds the source to HTMLString
-    // Below tests if the quote has a citation, and if so, adds it to HTMLString
+    let randomQuote = getRandomQuote();
+    let HTMLString = ``;
+    HTMLString += `<p class="quote">${randomQuote.quote}</p>`;
+    HTMLString += `<p class="source">${randomQuote.source}`;
     if (randomQuote.citation) {
         HTMLString += `<span class="citation">${randomQuote.citation}</span>`;
     }
-    // Below tests if the quote has a year, and if so, adds it to HTMLString
     if (randomQuote.year) {
         HTMLString += `<span class="year">${randomQuote.year}</span>`;
     }
-    // Below tests if the quote has any tags, and if so, adds it to HTMLString on its own line below the quote and source lines
     HTMLString += `</p>`;
     if (randomQuote.tags) {
         HTMLString += `<p class="tags">Tags: ${randomQuote.tags}</p>`
     }
 
+    const red = Math.floor(Math.random() * 255);
+    const green = Math.floor(Math.random() * 255);
+    const blue = Math.floor(Math.random() * 255);
+
+    document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
     document.querySelector('.quote-box').innerHTML = HTMLString;
 
     // document.querySelector('.quote').innerHTML = `${randomQuote.quote}`;
@@ -90,6 +101,12 @@ function printQuote() {
     //     document.querySelector('.source').innerHTML = `${randomQuote.source}`;
     // }
 }
+
+//  The below is a refresh interval to the code that selects a new random quote if the button is not pushed by a 
+//  user in the alotted time.
+
+let refreshInterval = setInterval(printQuote(), 6000);
+// setInterval(printQuote(), 6000);
 
 /***
  * click event listener for the print quote button
