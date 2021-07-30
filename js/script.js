@@ -81,9 +81,14 @@ function printQuote() {
 
     // This optional portion changes the background to a new color every time the a new quote is presented
 
-    const red = Math.floor(Math.random() * 255);
-    const green = Math.floor(Math.random() * 255);
-    const blue = Math.floor(Math.random() * 255);
+    function rgbPicker() {
+        return Math.floor(Math.random() * 255);
+    }
+
+    const red = rgbPicker();
+    const green = rgbPicker();
+    const blue = rgbPicker();
+
     document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 
     // This prints the resulting string to the web page in place of the previous quote
